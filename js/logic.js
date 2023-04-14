@@ -100,14 +100,16 @@ function addRow(){
 }
 
 
-
-function searchCellContent(tr){
+/*
+function searchCellContent(){
   var input, filter, table, tr, td, i, txtValue, trSave;
+
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("csv-table");
 
   tr = table.getElementsByTagName("tr");
+
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     if (td) {
@@ -131,7 +133,57 @@ function searchCellContent(tr){
 
   };
 
+}*/
+
+
+function givenContent(){
+  var input,tr,td,text,savedData,trSave;
+
+  var data = []
+
+  input = document.getElementById("myInput");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("csv-table")
+
+  tr = table.getElementsByTagName("tr")
+
+
+  for(i=0;i<tr.length;i++){
+
+      td = tr[i].getElementsByTagName("td")
+      for(x=0;x<td.length;x++){
+
+        text = tr[i].getElementsByTagName("td")[x];
+
+
+        if(text){
+        savedData = text.innerHTML.toUpperCase();
+
+        if (savedData.indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          trSave = tr[i];
+          break;
+
+        } else {
+          tr[i].style.display = "none";
+        }
+
+        }
+      }
+    }
+    document.getElementById("deleteRow").onclick = function() {
+
+      var table_tr = document.getElementById("csv-table").getElementsByTagName("tbody")[0];
+      table_tr.removeChild(trSave);
+
+
+
+  };
+
+
+
 }
+
 
 
 editTableCSV();
